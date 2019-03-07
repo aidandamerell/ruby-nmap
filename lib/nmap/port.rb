@@ -48,6 +48,24 @@ module Nmap
     def state
       @state ||= @node.at_xpath('state/@state').inner_text.to_sym
     end
+    
+    # Added boolean query methods
+    
+    def open?
+      if @state
+        true if @state == :open
+      else
+        @node.at_xpath('state/@state').inner_text == "open"
+      end
+    end
+    
+    def closed?
+      
+    end
+    
+    def filtered?
+      
+    end
 
     #
     # The reason the port was discovered.
