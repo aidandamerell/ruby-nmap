@@ -60,11 +60,19 @@ module Nmap
     end
     
     def closed?
-      
+      if @state
+        true if @state == :closed
+      else
+        @node.at_xpath('state/@state').inner_text == "closed"
+      end
     end
     
     def filtered?
-      
+      if @state
+        true if @state == :filtered
+      else
+        @node.at_xpath('state/@state').inner_text == "filtered"
+      end
     end
 
     #
